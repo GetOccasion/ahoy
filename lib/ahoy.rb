@@ -51,6 +51,9 @@ module Ahoy
   mattr_accessor :protect_from_forgery
   self.protect_from_forgery = true
 
+  mattr_accessor :enable_cors
+  self.enable_cors = false
+
   mattr_accessor :preserve_callbacks
   self.preserve_callbacks = [:load_authlogic, :activate_authlogic]
 

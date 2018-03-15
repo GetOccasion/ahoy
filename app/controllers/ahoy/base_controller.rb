@@ -10,6 +10,7 @@ module Ahoy
     end
     before_action :verify_request_size
     before_action :renew_cookies
+    before_action :enable_cors, if: -> { Ahoy.enable_cors }
 
     if respond_to?(:protect_from_forgery)
       protect_from_forgery with: :null_session, if: -> { Ahoy.protect_from_forgery }
@@ -33,6 +34,10 @@ module Ahoy
         logger.info "[ahoy] Payload too large"
         render text: "Payload too large\n", status: 413
       end
+    end
+
+    def enable_cors
+      headers['Access-Control-Allow-Origin'] = '*'
     end
   end
 end
